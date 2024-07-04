@@ -1,24 +1,24 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
-import axiosInstance from "../axios";
-import { setCredentials } from "../slices/userSlice";
+import { useNavigate } from "react-router-dom";
+import axiosInstance from "../../axios";
+import { setCredentials } from "../../slices/adminSlice";
 import { toast, ToastContainer } from "react-toastify";
 
-const Login = () => {
+const AdminLogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { userInfo } = useSelector((state) => state.user);
+  const { adminInfo, isAdmin } = useSelector((state) => state.admin);
 
   useEffect(() => {
-    if (userInfo) {
-      navigate("/home");
+    if (adminInfo && isAdmin) {
+      navigate("/adminHome");
     }
-  }, [navigate, userInfo]);
+  }, [navigate, adminInfo, isAdmin]);
 
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -47,10 +47,10 @@ const Login = () => {
       return;
     }
     try {
-      const res = await axiosInstance.post("/users/auth", { email, password });
+      const res = await axiosInstance.post("admin/login", { email, password });
       dispatch(setCredentials(res.data));
-      navigate("/home");
-      toast.success("User Logged in Successfully");
+      navigate("/adminHome");
+      toast.success("Admin Logged in Successfully");
     } catch (err) {
       if (err.response) {
         toast.error(err.response.data.error || err.response.data);
@@ -62,7 +62,7 @@ const Login = () => {
       <ToastContainer />
       <div className="max-w-md w-full mx-auto my-5 bg-gray-800 p-8 rounded-md border-2 shadow-sm shadow-white">
         <h2 className="text-2xl font-bold text-center text-gray-300 mb-8">
-          User Login
+          Admin Login
         </h2>
         <form className="space-y-5" onSubmit={handleSubmit}>
           <div>
@@ -98,19 +98,9 @@ const Login = () => {
             </button>
           </div>
         </form>
-        <div className="m-2 p-2 text-center">
-          <span className="text-white">
-            Don&apos;t have an account?
-            <Link to={"/signup"}>
-              <button className="font-medium dark:text-blue-500 hover:underline mx-1 px-1">
-                Sign up
-              </button>
-            </Link>
-          </span>
-        </div>
       </div>
     </div>
   );
 };
 
-export default Login;
+export default AdminLogin;

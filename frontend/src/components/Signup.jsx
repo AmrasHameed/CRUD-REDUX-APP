@@ -3,18 +3,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import axiosInstance from "../axios";
-import { setCredentials } from "../slices/authSlice";
+import { setCredentials } from "../slices/userSlice";
 
 const Signup = () => {
-  const [name, setName] = useState();
-  const [image, setImage] = useState();
+  const [name, setName] = useState('');
+  const [image, setImage] = useState('');
   const [imagePreview, setImagePreview] = useState(null);
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
-  const [confirmPassword, setConfirmPassword] = useState();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { userInfo } = useSelector((state) => state.auth);
+  const { userInfo } = useSelector((state) => state.user);
 
   useEffect(() => {
     if (userInfo) {
@@ -64,7 +64,7 @@ const Signup = () => {
         formData.append("password", password);
         formData.append("image", image);
 
-        const { data } = await axiosInstance.post("/", formData, {
+        const { data } = await axiosInstance.post("/users/", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },

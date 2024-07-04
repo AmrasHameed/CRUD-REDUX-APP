@@ -5,7 +5,6 @@ const protect = async (req, res, next) => {
     try {
         let token;
         token = req.cookies.jwt;
-        console.log(token,"token")
         if(token) {
             try{
                 const decoded = jwt.verify(token, process.env.JWT_SECRET);

@@ -3,7 +3,7 @@ import Header from "./Header";
 import { Link } from "react-router-dom";
 
 const Profile = () => {
-  const { userInfo } = useSelector((state) => state.auth);
+  const { userInfo } = useSelector((state) => state.user);
   return (
     <div>
       <Header />

@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 
 const Main = () => {
-  const { userInfo } = useSelector((state) => state.auth);
+  const { userInfo } = useSelector((state) => state.user);
   return (
     <div className="bg-gray-900 text-white flex justify-center items-center my-36">
       {userInfo && (

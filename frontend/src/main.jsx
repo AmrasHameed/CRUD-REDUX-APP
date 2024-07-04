@@ -17,6 +17,11 @@ import store from "./store.js";
 import PrivateRoute from "./components/PrivateRoute.jsx";
 import Profile from "./components/Profile.jsx";
 import EditProfile from "./components/EditProfile.jsx";
+import AdminLogin from "./components/admin/AdminLogin.jsx";
+import AdminHome from "./components/admin/AdminHome.jsx";
+import AddUser from "./components/admin/AddUser.jsx";
+import UpdateUser from "./components/admin/UpdateUser.jsx";
+import AdminPrivate from "./components/admin/AdminPrivate.jsx";
 
 const appRouter = createBrowserRouter(
   createRoutesFromElements(
@@ -32,17 +37,27 @@ const appRouter = createBrowserRouter(
       <Route path="" element={<PrivateRoute />}>
         <Route path="/editProfile" element={<EditProfile />} />
       </Route>
+      <Route path="/admin" element={<AdminLogin />} />
+      <Route path="" element={<AdminPrivate />}>
+        <Route path="/adminHome" element={<AdminHome />} />
+      </Route>
+      <Route path="" element={<AdminPrivate />}>
+        <Route path="/addUser" element={<AddUser />} />
+      </Route>
+      <Route path="" element={<AdminPrivate />}>
+        <Route path="/update/:id" element={<UpdateUser />} />
+      </Route>
     </>
   )
 );
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <Provider store={store}>
-    <React.StrictMode>
-      <div>
+  <>
+    <ToastContainer />
+    <Provider store={store}>
+      <React.StrictMode>
         <RouterProvider router={appRouter} />
-        <ToastContainer />
-      </div>
-    </React.StrictMode>
-  </Provider>
+      </React.StrictMode>
+    </Provider>
+  </>
 );

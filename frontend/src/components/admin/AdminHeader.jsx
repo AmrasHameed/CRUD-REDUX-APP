@@ -1,18 +1,18 @@
 import { Link, useNavigate } from "react-router-dom";
-import axiosInstance from "../axios";
-import { logout } from "../slices/userSlice";
+import axiosInstance from '../../axios';
+import { logout } from "../../slices/adminSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
-const Header = () => {
-  const { userInfo } = useSelector((state) => state.user);
+const AdminHeader = () => {
+  const { adminInfo } = useSelector((state) => state.admin);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleLogout = async () => {
     try {
-      await axiosInstance.post("users/logout");
+      await axiosInstance.post("admin/logout");
       dispatch(logout());
-      navigate("/");
+      navigate("/admin");
     } catch (err) {
       if (err.response) {
         toast.error(err.response.data.error || err.response.data);
@@ -25,10 +25,10 @@ const Header = () => {
       <div className="flex justify-end items-center w-full space-x-6">
         <ul className="flex items-center space-x-6 m-0 p-0">
           <li className="my-5 p-2.5 font-light font-lucida text-lg text-gray-300 hover:text-gray-500">
-            <Link to={"/home"}>Home</Link>
+            <Link to={"/adminHome"}>Home</Link>
           </li>
           <li className="my-5 p-2.5 font-light font-lucida text-lg text-gray-300 hover:text-gray-500">
-            <Link to={"/userProfile"}>User Profile</Link>
+            <Link to={"/addUser"}>Add User</Link>
           </li>
           <li className="my-5 p-1 text-lg">
             <button
@@ -39,12 +39,12 @@ const Header = () => {
             </button>
           </li>
           <li className="my-5 p-1 text-lg">
-            {userInfo && (
+            {adminInfo && (
               <div className="w-11 h-11 bg-white rounded-full overflow-hidden">
                 <img
                   className="w-full h-full object-cover"
                   src={`http://localhost:5000/uploads/${encodeURIComponent(
-                    userInfo.image
+                    adminInfo.image
                   )}`}
                 />
               </div>
@@ -53,7 +53,7 @@ const Header = () => {
         </ul>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Header;
+export default AdminHeader
