@@ -4,7 +4,7 @@ import axiosInstance from "../../axios";
 import AdminHeader from "./AdminHeader";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../../slices/userSlice";
+import { logout } from "../../slices/adminSlice";
 import Swal from "sweetalert2";
 import 'animate.css'
 

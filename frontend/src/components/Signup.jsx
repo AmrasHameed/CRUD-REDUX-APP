@@ -102,7 +102,7 @@ const Signup = () => {
         <div>
           <label className="block  font-medium mb-2">Email:</label>
           <input
-            type="email"
+            type="text"
             className="w-full px-3 py-1 bg-gray-700  border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-white"
             onChange={(e) => setEmail(e.target.value)}
             value={email}

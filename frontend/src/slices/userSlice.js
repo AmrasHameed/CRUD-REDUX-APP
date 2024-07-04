@@ -15,19 +15,16 @@ const authSlice = createSlice({
       state.userInfo = action.payload;
       localStorage.setItem("userInfo", JSON.stringify(action.payload));
       localStorage.setItem("token", action.payload.token);
-      if(action.payload.isAdmin) {
-        state.isAdmin = action.payload.isAdmin;
-        localStorage.setItem('isAdmin', action.payload.isAdmin)
-      }
     },
-    logout: (state) => {
+    logoutUser: (state) => {
       state.userInfo = null;
+      state.token = null;
       localStorage.removeItem("userInfo");
       localStorage.removeItem("token");
     },
   },
 });
 
-export const { setCredentials, logout } = authSlice.actions;
+export const { setCredentials, logoutUser } = authSlice.actions;
 
 export default authSlice.reducer;

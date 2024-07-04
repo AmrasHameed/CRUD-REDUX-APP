@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import axiosInstance from "../axios";
-import { logout } from "../slices/userSlice";
+import { logoutUser } from "../slices/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
@@ -11,7 +11,7 @@ const Header = () => {
   const handleLogout = async () => {
     try {
       await axiosInstance.post("users/logout");
-      dispatch(logout());
+      dispatch(logoutUser());
       navigate("/");
     } catch (err) {
       if (err.response) {
