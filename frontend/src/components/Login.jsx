@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axiosInstance from "../axios";
 import { setCredentials } from "../slices/userSlice";
 import { toast, ToastContainer } from "react-toastify";
+import { decrement, increment } from "../slices/counter";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -13,6 +14,8 @@ const Login = () => {
   const dispatch = useDispatch();
 
   const { userInfo } = useSelector((state) => state.user);
+
+  const {count} = useSelector((state) => state.counter)
 
   useEffect(() => {
     if (userInfo) {
@@ -26,8 +29,17 @@ const Login = () => {
   };
 
   const validatePassword = (password) => {
-    return password.length >= 6; // Minimum length of 6 characters
+    return password.length >= 6; 
   };
+
+  const handleIncrement = () => {
+    dispatch(increment())
+  }
+  const handleDecrement = () => {
+    if(count!==0) {
+      dispatch(decrement())
+    }
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -60,6 +72,9 @@ const Login = () => {
   return (
     <div className="flex items-center justify-center min-h-screen ">
       <ToastContainer />
+      <h1 className="text-white text-2xl">{count}</h1>
+      <button className="bg-white m-2" onClick={()=>handleIncrement()}>Increment</button>
+      <button className="bg-white" onClick={()=>handleDecrement()}>Decrement</button>
       <div className="max-w-md w-full mx-auto my-5 bg-gray-800 p-8 rounded-md border-2 shadow-sm shadow-white">
         <h2 className="text-2xl font-bold text-center text-gray-300 mb-8">
           User Login

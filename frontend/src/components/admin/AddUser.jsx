@@ -1,6 +1,6 @@
 import { useState } from "react";
 import AdminHeader from "./AdminHeader";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../../axios";
 
@@ -60,8 +60,8 @@ const AddUser = () => {
             "Content-Type": "multipart/form-data",
           },
         });
-        navigate("/adminHome");
         toast.success("User Created Successfully");
+        navigate("/adminHome");
       } catch (err) {
         if (err.response) {
           toast.error(err.response.data.error || err.response.data);
@@ -77,6 +77,7 @@ const AddUser = () => {
   };
   return (
     <div>
+      <ToastContainer/>
       <AdminHeader />
       <div className="max-w-md mx-auto my-5 text-white bg-gray-800 p-8 rounded-md border-2 shadow-sm shadow-white">
         <h2 className="text-2xl font-bold text-center  mb-1">Add User</h2>

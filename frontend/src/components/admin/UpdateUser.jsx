@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import AdminHeader from "./AdminHeader"
 import { useNavigate, useParams } from "react-router-dom";
 import axiosInstance from "../../axios";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 
 const UpdateUser = () => {
     const [name, setName] = useState("");
@@ -71,6 +71,7 @@ const UpdateUser = () => {
   
     return (
       <>
+        <ToastContainer />
         <AdminHeader/>
         <div className="max-w-md mx-auto my-5 text-white bg-gray-800 p-8 rounded-md border-2 shadow-sm shadow-white">
           <h2 className="text-2xl font-bold text-center  mb-1">Update User</h2>

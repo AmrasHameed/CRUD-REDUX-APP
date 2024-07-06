@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axiosInstance from "../../axios";
 import AdminHeader from "./AdminHeader";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../slices/adminSlice";
 import Swal from "sweetalert2";
@@ -73,7 +73,7 @@ const AdminHome = () => {
           }
         }
         setDeleted(true);
-        toast.success(res.data.message);
+        toast.success(res.data.message || "User Deleted Succefully");
       }
     } catch (error) {
       toast.error("User is not Deleted");
@@ -82,6 +82,7 @@ const AdminHome = () => {
   };
   return (
     <>
+      <ToastContainer />
       <AdminHeader />
       <div className="pt-3 w-[90%] flex justify-center mx-auto">
         <input

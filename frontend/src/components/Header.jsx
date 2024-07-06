@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axiosInstance from "../axios";
 import { logoutUser } from "../slices/userSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 
 const Header = () => {
   const { userInfo } = useSelector((state) => state.user);
@@ -21,6 +21,7 @@ const Header = () => {
   };
   return (
     <div className="flex justify-between items-center p-2.5 bg-gray-800 rounded-md shadow-lg">
+    <ToastContainer />
       <h1 className="font-bold px-10 text-white text-3xl font-mono">CRUDAPP</h1>
       <div className="flex justify-end items-center w-full space-x-6">
         <ul className="flex items-center space-x-6 m-0 p-0">

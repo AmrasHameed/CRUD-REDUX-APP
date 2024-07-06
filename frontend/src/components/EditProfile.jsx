@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import axiosInstance from "../axios";
 import { setCredentials } from "../slices/userSlice";
 import Header from "./Header";
@@ -65,6 +65,7 @@ const EditProfile = () => {
 
   return (
     <>
+      <ToastContainer />
       <Header />
       <div className="max-w-md mx-auto my-5 text-white bg-gray-800 p-8 rounded-md border-2 shadow-sm shadow-white">
         <h2 className="text-2xl font-bold text-center  mb-1">Update Profile</h2>

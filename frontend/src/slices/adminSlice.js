@@ -33,6 +33,7 @@ const adminSlice = createSlice({
   },
 });
 
+
 export const { setCredentials, logout } = adminSlice.actions;
 
 export default adminSlice.reducer;
